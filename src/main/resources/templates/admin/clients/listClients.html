@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8"/>
+    <title>A/W - Списък с
+        Клиенти</title>
+
+    <!-- Site favicon -->
+    <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="http://localhost:8080/vendors/images/brandAW.png"
+    />
+    <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="http://localhost:8080/vendors/images/brandAW.png"
+    />
+    <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="http://localhost:8080/vendors/images/brandAW.png"
+    />
+
+    <!-- Mobile Specific Metas -->
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <!-- Google Font -->
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+    />
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/vendors/styles/core.css"/>
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="http://localhost:8080/vendors/styles/icon-font.min.css"
+    />
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="http://localhost:8080/src/plugins/datatables/css/dataTables.bootstrap4.min.css"
+    />
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="http://localhost:8080/src/plugins/datatables/css/responsive.bootstrap4.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/vendors/styles/style.css"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
+          integrity="sha512-U9/Ir5e5q92Hb1/FWlGpefRg5h2wEQuvHJWEEzOgZfV15Qk+TvOD7VWmK8Uc7V+OFq6s69s/kWJN8kX7BbTXg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
+    <script src=https://code.jquery.com/jquery-3.6.0.js></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"
+    ></script>
+    <script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
+
+			gtag("config", "G-GBZ3SGGX85");
+
+
+    </script>
+    <!-- Google Tag Manager -->
+    <script>
+			(function (w, d, s, l, i) {
+				w[l] = w[l] || [];
+				w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s),
+					dl = l != "dataLayer" ? "&l=" + l : "";
+				j.async = true;
+				j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+				f.parentNode.insertBefore(j, f);
+			})(window, document, "script", "dataLayer", "GTM-NXZMQSS");
+
+
+    </script>
+    <!-- End Google Tag Manager -->
+    <!--Custom styles-->
+    <style>
+		td,th{
+		text-align: center;
+		}
+
+
+    </style>
+    <!--End Custom styles-->
+
+    <script src="http://localhost:8080/own/scripts/ClientOccupiedEmployeesList.js"></script>
+
+</head>
+<body class="sidebar-light">
+<div class="header">
+    <div class="header-left">
+        <div class="menu-icon bi bi-list"></div>
+    </div>
+    <div class="header-right">
+        <div class="user-info-dropdown">
+            <div class="dropdown">
+                <a
+                        class="dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-toggle="dropdown"
+                >
+							<span class="user-icon">
+								<img src="http://localhost:8080/account/profile/image" alt=""/>
+							</span>
+                    <span class="user-name" th:text="${account.username}"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                    <a class="dropdown-item" th:href="@{/account/profile}"
+                    ><i class="dw dw-user1"></i> Профил</a
+                    >
+                    <form class="dropdown-item" th:action="@{/logout}" method="POST">
+                        <button type="submit" class="btn btn-danger"
+                                value="Logout"><i class="dw dw-logout"></i>Изход
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="left-side-bar">
+    <div class="brand-logo">
+        <a th:href="@{/}">
+            <img src="http://localhost:8080/vendors/images/bannerAW.png" alt="" class="dark-logo"/>
+            <img
+                    src="http://localhost:8080/vendors/images/bannerAW.png"
+                    alt=""
+                    class="light-logo"
+            />
+        </a>
+        <div class="close-sidebar" data-toggle="left-sidebar-close">
+            <i class="ion-close-round"></i>
+        </div>
+    </div>
+    <div class="menu-block customscroll">
+        <div class="sidebar-menu">
+            <ul id="accordion-menu">
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon bi bi-people"></span>
+
+                        <span class="mtext">Админи</span>
+                    </a>
+                    <ul class="submenu">
+                        <li>
+                            <a th:href="@{/admin/list}"><span class="micon bi bi-table"></span>Списък с
+                                Админи</a>
+                        </li>
+                        <li><a th:href="@{/admin/add}">
+                            <i style="font-size: 1.5rem" class="bi bi-person-plus"></i>Добавяне на
+                            Админ</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon bi bi-people"></span>
+
+                        <span class="mtext">Служители</span>
+                    </a>
+                    <ul class="submenu">
+                        <li>
+                            <a th:href="@{/admin/employees/list}"><span class="micon bi bi-table"></span>Списък със
+                                Служители</a>
+                        </li>
+                        <li><a th:href="@{/admin/employees/add}">
+                            <i style="font-size: 1.5rem" class="bi bi-person-plus"></i>Добавяне на
+                            Служител</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon bi bi-briefcase"></span>
+                        <span class="mtext">Клиенти</span>
+                    </a>
+                    <ul class="submenu">
+                        <li>
+                            <a th:href="@{/admin/clients/list}">
+                                <span class="micon bi bi-table"></span>Списък с Клиенти
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/admin/clients/add}">
+                                <i style="font-size: 1.5rem" class="bi bi-person-plus"></i>Добавяне на Клиент
+                            </a>
+                        </li>
+                    </ul>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon bi bi-boxes"></span>
+
+                        <span class="mtext">Проекти</span>
+                    </a>
+                    <ul class="submenu">
+                        <li>
+                            <a th:href="@{/admin/projects/list}"><span class="micon bi bi-table"></span>Списък с Проекти</a>
+                        </li>
+                        <li><a th:href="@{/admin/projects/add}">
+                            <i style="font-size: 1.5rem" ></i>Добавяне на Проект</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu">
+                    <a th:href="@{/admin/employees/stats}" class="dropdown-toggle no-arrow">
+								<span class="micon bi bi-bar-chart"></span
+                                ><span class="mtext">Статистика</span>
+                    </a>
+                </li>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="mobile-menu-overlay"></div>
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    Клиенти
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    Списък с Клиенти
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-md-6 col-sm-12 text-right">
+                    </div>
+                </div>
+            </div>
+            <!-- Simple Datatable start -->
+            <div class="card-box mb-30">
+                <div class="pd-20">
+                </div>
+                <div class="pb-20">
+                    <div id="DataTables_Table_2_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+
+                            <div class="text-center">
+                                <a th:href="@{/admin/clients/add}">
+                                    <button class="btn btn-primary">+
+                                        <i style="font-size: 2rem" class="bi bi-briefcase fs-2"></i>
+                                    </button>
+                                </a>
+                            </div>
+                        <!--Table with Search and Export fields-->
+                        <table class="table hover multiple-select-row data-table-export nowrap dataTable no-footer dtr-inline collapsed"
+                               id="DataTables_Table_2" role="grid">
+                            <thead>
+                            <tr>
+                                <th class="table-plus datatable-nosort">ID</th>
+                                <th>Клиент</th>
+                                <th>Брой Проекти</th>
+                                <th>Заети Служители</th>
+                                <th class="datatable-nosort">Опции</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="client:${allClients}">
+                                <td class="table-plus" th:text="${client.id}" id="clientId" name="clientId"></td>
+                                <td th:text="${client.clientName}"></td>
+                                <td th:text="${#lists.size(client.projectsList)}"></td>
+                                <td id="employeeCountCell"></td>
+
+                                <td>
+                                    <div class="dropdown">
+                                        <a
+                                                class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+                                                href="#"
+                                                role="button"
+                                                data-toggle="dropdown"
+                                        >
+                                            <i class="dw dw-more"></i>
+                                        </a>
+                                        <div
+                                                class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
+                                        >
+                                            <a class="dropdown-item"
+                                               th:href="@{/admin/clients/details/{clientId}(clientId=${client.id})}"
+                                            ><i class="dw dw-eye"></i> Детайли</a
+                                            >
+                                            <a class="dropdown-item"
+                                               th:href="@{/admin/clients/edit/{clientId}(clientId=${client.id})}"
+                                            ><i class="dw dw-edit2"></i> Редактирай</a
+                                            >
+                                            <a class="dropdown-item"
+                                               th:href="@{/admin/clients/delete/{clientId}(clientId=${client.id})}"
+                                            ><i class="dw dw-delete-3"></i>Изтрий</a
+                                            >
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- js -->
+<script src="http://localhost:8080/vendors/scripts/core.js"></script>
+<script src="http://localhost:8080/vendors/scripts/script.min.js"></script>
+<script src="http://localhost:8080/vendors/scripts/process.js"></script>
+<script src="http://localhost:8080/vendors/scripts/layout-settings.js"></script>
+<script src="http://localhost:8080/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+<script src="http://localhost:8080/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+<script src="http://localhost:8080/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+<script src="http://localhost:8080/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+<!-- buttons for Export datatable -->
+<script src="http://localhost:8080/src/plugins/datatables/js/dataTables.buttons.min.js"></script>
+<script src="http://localhost:8080/src/plugins/datatables/js/buttons.bootstrap4.min.js"></script>
+<script src="http://localhost:8080/src/plugins/datatables/js/buttons.print.min.js"></script>
+<script src="http://localhost:8080/src/plugins/datatables/js/buttons.html5.min.js"></script>
+<script src="http://localhost:8080/src/plugins/datatables/js/buttons.flash.min.js"></script>
+<script src="http://localhost:8080/src/plugins/datatables/js/pdfmake.min.js"></script>
+<script src="http://localhost:8080/src/plugins/datatables/js/vfs_fonts.js"></script>
+<!-- Datatable Setting js -->
+<script src="http://localhost:8080/vendors/scripts/datatable-setting.js"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript
+>
+    <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS"
+            height="0"
+            width="0"
+            style="display: none; visibility: hidden"
+    ></iframe
+    >
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+</body>
+</html>

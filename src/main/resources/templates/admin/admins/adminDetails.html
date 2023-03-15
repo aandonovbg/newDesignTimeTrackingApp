@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8"/>
+    <title>A/W - Админ Детайли</title>
+
+    <!-- Site favicon -->
+    <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="http://localhost:8080/vendors/images/brandAW.png"
+    />
+    <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="http://localhost:8080/vendors/images/brandAW.png"
+    />
+    <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="http://localhost:8080/vendors/images/brandAW.png"
+    />
+
+    <!-- Mobile Specific Metas -->
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <!-- Google Font -->
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+    />
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/vendors/styles/core.css"/>
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="http://localhost:8080/vendors/styles/icon-font.min.css"
+    />
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="http://localhost:8080/src/plugins/datatables/css/dataTables.bootstrap4.min.css"
+    />
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="http://localhost:8080/src/plugins/datatables/css/responsive.bootstrap4.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/vendors/styles/style.css"/>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"
+    ></script>
+    <script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
+
+			gtag("config", "G-GBZ3SGGX85");
+
+
+
+    </script>
+    <!-- Google Tag Manager -->
+    <script>
+			(function (w, d, s, l, i) {
+				w[l] = w[l] || [];
+				w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s),
+					dl = l != "dataLayer" ? "&l=" + l : "";
+				j.async = true;
+				j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+				f.parentNode.insertBefore(j, f);
+			})(window, document, "script", "dataLayer", "GTM-NXZMQSS");
+    </script>
+    <!-- End Google Tag Manager -->
+</head>
+<body class="sidebar-light">
+<div class="header">
+    <div class="header-left">
+        <div class="menu-icon bi bi-list"></div>
+    </div>
+    <div class="header-right">
+        <div class="user-info-dropdown">
+            <div class="dropdown">
+                <a
+                        class="dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-toggle="dropdown"
+                >
+							<span class="user-icon">
+								<img src="http://localhost:8080/account/profile/image" alt=""/>
+							</span>
+                    <span class="user-name" th:text="${account.username}"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                    <a class="dropdown-item" th:href="@{/account/profile}"
+                    ><i class="dw dw-user1"></i> Профил</a
+                    >
+                    <form class="dropdown-item" th:action="@{/logout}" method="POST">
+                        <button type="submit" class="btn btn-danger"
+                                value="Logout"><i class="dw dw-logout"></i>Изход
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="left-side-bar">
+    <div class="brand-logo">
+        <a th:href="@{/}">
+            <img src="http://localhost:8080/vendors/images/bannerAW.png" alt="" class="dark-logo"/>
+            <img
+                    src="http://localhost:8080/vendors/images/bannerAW.png"
+                    alt=""
+                    class="light-logo"
+            />
+        </a>
+        <div class="close-sidebar" data-toggle="left-sidebar-close">
+            <i class="ion-close-round"></i>
+        </div>
+    </div>
+    <div class="menu-block customscroll">
+        <div class="sidebar-menu">
+            <ul id="accordion-menu">
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon bi bi-people"></span>
+
+                        <span class="mtext">Админи</span>
+                    </a>
+                    <ul class="submenu">
+                        <li>
+                            <a th:href="@{/admin/list}"><span class="micon bi bi-table"></span>Списък с
+                                Админи</a>
+                        </li>
+                        <li><a th:href="@{/admin/add}">
+                            <i style="font-size: 1.5rem" class="bi bi-person-plus"></i>Добавяне на
+                            Админ</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon bi bi-people"></span>
+
+                        <span class="mtext">Служители</span>
+                    </a>
+                    <ul class="submenu">
+                        <li>
+                            <a th:href="@{/admin/employees/list}"><span class="micon bi bi-table"></span>Списък със
+                                Служители</a>
+                        </li>
+                        <li><a th:href="@{/admin/employees/add}">
+                            <i style="font-size: 1.5rem" class="bi bi-person-plus"></i>Добавяне на
+                            Служител</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon bi bi-briefcase"></span>
+                        <span class="mtext">Клиенти</span>
+                    </a>
+                    <ul class="submenu">
+                        <li>
+                            <a th:href="@{/admin/clients/list}">
+                                <span class="micon bi bi-table"></span>Списък с Клиенти
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/admin/clients/add}">
+                                <i style="font-size: 1.5rem" class="bi bi-person-plus"></i>Добавяне на Клиент
+                            </a>
+                        </li>
+                    </ul>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon bi bi-boxes"></span>
+
+                        <span class="mtext">Проекти</span>
+                    </a>
+                    <ul class="submenu">
+                        <li>
+                            <a th:href="@{/admin/projects/list}"><span class="micon bi bi-table"></span>Списък с Проекти</a>
+                        </li>
+                        <li><a th:href="@{/admin/projects/add}">
+                            <i style="font-size: 1.5rem" ></i>Добавяне на Проект</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu">
+                    <a th:href="@{/admin/employees/stats}" class="dropdown-toggle no-arrow">
+								<span class="micon bi bi-bar-chart"></span
+                                ><span class="mtext">Статистика</span>
+                    </a>
+                </li>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="mobile-menu-overlay"></div>
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="title">
+                            <h4>Профил</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="index.html">Админи</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a th:href="@{/admin/list}">Списък с Админи</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page" th:text="${admin.fullName}">
+
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30">
+                    <div class="pd-20 card-box height-50-p">
+                        <div class="profile-photo">
+                            <img th:if="${profilePicture != null}"
+                                 th:src="'data:image/' + ${imageFormat} + ';base64,' + ${profilePicture}"
+                                 alt="Employee profile picture"
+                                 class="avatar-photo"
+                            >
+                        </div>
+                        <h5 class="text-center h5 mb-0" th:text="${admin.fullName}"></h5>
+                        <p class="text-center text-muted font-14" th:text="${admin.jobTitle}">
+
+                        </p>
+                        <div class="profile-info">
+                            <h5 class="mb-20 h5 text-blue">Детайли</h5>
+                            <ul>
+                                <li>
+                                    <span>Заплата:</span>
+                                    <p th:text="${admin.salary}"></p>
+                                </li>
+                                <li>
+                                    <span>@Email:</span>
+                                    <p th:text="${admin.email}"></p>
+                                </li>
+                                <li>
+                                    <span>GSM:</span>
+                                    <p th:text="${admin.GSM}"></p>
+                                </li>
+                                <li>
+                                    <span>Адрес:</span>
+                                    <p th:text="${admin.address}"></p>
+                                </li>
+                                <li>
+                                    <span>Град:</span>
+                                    <p th:text="${admin.city}"></p><br/>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+<!--                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-30">-->
+<!--                    <div class="card-box height-100-p overflow-hidden">-->
+<!--                        <div class="profile-tab height-100-p">-->
+<!--                            <div class="tab height-100-p">-->
+<!--                                <ul class="nav nav-tabs customtab" role="tablist">-->
+<!--                                    <li class="nav-item">-->
+<!--                                        <a-->
+<!--                                                class="nav-link active"-->
+<!--                                                data-toggle="tab"-->
+<!--                                                href="#timeline"-->
+<!--                                                role="tab"-->
+<!--                                        >Участие в Проекти</a-->
+<!--                                        >-->
+<!--                                    </li>-->
+<!--                                    <li class="nav-item">-->
+<!--                                        <a-->
+<!--                                                class="nav-link"-->
+<!--                                                data-toggle="tab"-->
+<!--                                                href="#tasks"-->
+<!--                                                role="tab"-->
+<!--                                        >Седмичен Отчет</a-->
+<!--                                        >-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                                <div class="tab-content">-->
+<!--                                    &lt;!&ndash; Timeline Tab start &ndash;&gt;-->
+<!--                                    <div-->
+<!--                                            class="tab-pane fade show active"-->
+<!--                                            id="timeline"-->
+<!--                                            role="tabpanel"-->
+<!--                                    >-->
+<!--                                        <div class="pd-20">-->
+<!--                                            <table class="table hover multiple-select-row data-table-export nowrap dataTable no-footer dtr-inline collapsed"-->
+<!--                                                   id="DataTables_Table_3" role="grid">-->
+<!--                                                <thead>-->
+<!--                                                <tr>-->
+<!--                                                    <th class="table-plus datatable-nosort">ID</th>-->
+<!--                                                    <th style="text-align: center;">Проект</th>-->
+<!--                                                    <th style="text-align: center;">Краен срок</th>-->
+<!--                                                </tr>-->
+<!--                                                </thead>-->
+<!--                                                <tbody>-->
+<!--                                                <tr th:each="project:${employeeProjectsList}">-->
+<!--                                                    <td class="table-plus" th:text="${project.id}"></td>-->
+<!--                                                    <td style="text-align: center;" th:text="${project.projectName}"></td>-->
+<!--                                                    <td style="text-align: center;" th:text="${project.expirationDate}"></td>-->
+<!--                                                </tr>-->
+<!--                                                </tbody>-->
+<!--                                            </table>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    &lt;!&ndash; Timeline Tab End &ndash;&gt;-->
+<!--                                    &lt;!&ndash; Tasks Tab start &ndash;&gt;-->
+<!--                                    <div class="tab-pane fade" id="tasks" role="tabpanel">-->
+<!--                                        <h4 style="text-align: center;">Седмица N: <span class="breadcrumb-item active" aria-current="page" th:text="${currentWeekNumber}"></span></h4>-->
+<!--                                            <div class="pd-20">-->
+<!--                                                <table class="table hover multiple-select-row data-table-export nowrap dataTable no-footer dtr-inline collapsed"-->
+<!--                                                       id="DataTables_Table_2" role="grid">-->
+<!--                                                    <thead>-->
+<!--                                                    <tr>-->
+<!--                                                        <th style="text-align: center;" class="table-plus datatable-nosort">Дата</th>-->
+<!--                                                        <th style="text-align: center;">Клиент</th>-->
+<!--                                                        <th style="text-align: center;">Отделени часове=<span th:text="${sumTotalHours}"></span></th>-->
+<!--                                                    </tr>-->
+<!--                                                    </thead>-->
+<!--                                                    <tbody>-->
+<!--                                                    <tr th:each="dailyProtocol:${employeeCurrentWeekProtocolsList}">-->
+<!--                                                        <td style="text-align: center;" class="table-plus" th:text="${dailyProtocol.protocolDate}"></td>-->
+<!--                                                        <td style="text-align: center;" th:text="${dailyProtocol.client.clientName}"></td>-->
+<!--&lt;!&ndash;                                                        <td style="text-align: center;" th:text="${dailyProtocol.project.projectName}"></td>&ndash;&gt;-->
+<!--                                                        <td style="text-align: center;" th:text="${dailyProtocol.timeWorked}"></td>-->
+<!--                                                    </tr>-->
+<!--                                                    </tbody>-->
+<!--                                                </table>-->
+<!--                                            </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- js -->
+
+<script src="http://localhost:8080/src/plugins/cropperjs/dist/cropper.js"></script>
+<script src="http://localhost:8080/vendors/scripts/core.js"></script>
+<script src="http://localhost:8080/vendors/scripts/script.min.js"></script>
+<script src="http://localhost:8080/vendors/scripts/process.js"></script>
+<script src="http://localhost:8080/vendors/scripts/layout-settings.js"></script>
+<script src="http://localhost:8080/src/plugins/apexcharts/apexcharts.min.js"></script>
+<script src="http://localhost:8080/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+<script src="http://localhost:8080/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+<script src="http://localhost:8080/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+<script src="http://localhost:8080/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+<script src="http://localhost:8080/vendors/scripts/dashboard.js"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript
+>
+    <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS"
+            height="0"
+            width="0"
+            style="display: none; visibility: hidden"
+    ></iframe
+    >
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8"/>
+    <title>A/W - Начало</title>
+
+    <!-- Site favicon -->
+    <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="vendors/images/brandAW.png"
+    />
+    <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="vendors/images/brandAW.png"
+    />
+    <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="vendors/images/brandAW.png"
+    />
+
+    <!-- Mobile Specific Metas -->
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <!-- Google Font -->
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+    />
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/vendors/styles/core.css"/>
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="http://localhost:8080/vendors/styles/icon-font.min.css"
+    />
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="http://localhost:8080/src/plugins/datatables/css/dataTables.bootstrap4.min.css"
+    />
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="http://localhost:8080/src/plugins/datatables/css/responsive.bootstrap4.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/vendors/styles/style.css"/>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"
+    ></script>
+    <script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
+
+			gtag("config", "G-GBZ3SGGX85");
+
+
+    </script>
+    <!-- Google Tag Manager -->
+    <script>
+			(function (w, d, s, l, i) {
+				w[l] = w[l] || [];
+				w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s),
+					dl = l != "dataLayer" ? "&l=" + l : "";
+				j.async = true;
+				j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+				f.parentNode.insertBefore(j, f);
+			})(window, document, "script", "dataLayer", "GTM-NXZMQSS");
+
+
+    </script>
+    <!-- End Google Tag Manager -->
+    <!-- Custom CSS -->
+    <style>
+    .dropdown-toggle.no-arrow::after {
+    display: none;
+}
+
+    </style>
+    <!-- Custom Script -->
+    <script>
+  fetch('/client/allClientsData')
+    .then(response => response.json())
+    .then(data => {
+        const clientNames = [];
+        const numProjects = [];
+        data.forEach(clientData => {
+            clientNames.push(clientData.clientName);
+            numProjects.push(clientData.numProjects);
+        });
+
+        const clientsChart = new Chart(document.getElementById('clientsChart'), {
+            type: 'bar',
+            data: {
+                labels: clientNames,
+                datasets: [{
+                    label: 'Брой Проекти',
+                    data: numProjects,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    });
+
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="http://localhost:8080/own/scripts/MyChartScript.js"></script>
+</head>
+<body class="sidebar-light">
+<div class="header">
+    <div class="header-left">
+        <div class="menu-icon bi bi-list"></div>
+    </div>
+
+    <div class="header-right">
+        <div class="user-info-dropdown">
+            <div class="dropdown">
+                <a
+                        class="dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-toggle="dropdown"
+                >
+							<span class="user-icon">
+								<img src="http://localhost:8080/account/profile/image" alt=""/>
+							</span>
+                    <span class="user-name" th:text="${account.username}"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                    <a class="dropdown-item" th:href="@{/account/profile}"
+                    ><i class="dw dw-user1"></i> Профил</a
+                    >
+                    <form class="dropdown-item" th:action="@{/logout}" method="POST">
+                        <button type="submit" class="btn btn-danger"
+                                value="Logout"><i class="dw dw-logout"></i>Изход
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="left-side-bar">
+    <div class="brand-logo">
+        <a th:href="@{/}">
+            <img src="http://localhost:8080/vendors/images/bannerAW.png" alt="" class="dark-logo"/>
+            <img
+                    src="http://localhost:8080/vendors/images/bannerAW.png"
+                    alt=""
+                    class="light-logo"
+            />
+        </a>
+        <div class="close-sidebar" data-toggle="left-sidebar-close">
+            <i class="ion-close-round"></i>
+        </div>
+    </div>
+    <div class="menu-block customscroll">
+        <div class="sidebar-menu">
+            <ul id="accordion-menu">
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon bi bi-people"></span>
+
+                        <span class="mtext">Админи</span>
+                    </a>
+                    <ul class="submenu">
+                        <li>
+                            <a th:href="@{/admin/list}"><span class="micon bi bi-table"></span>Списък с
+                                Админи</a>
+                        </li>
+                        <li><a th:href="@{/admin/add}">
+                            <i style="font-size: 1.5rem" class="bi bi-person-plus"></i>Добавяне на
+                            Админ</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon bi bi-people"></span>
+
+                        <span class="mtext">Служители</span>
+                    </a>
+                    <ul class="submenu">
+                        <li>
+                            <a th:href="@{/admin/employees/list}"><span class="micon bi bi-table"></span>Списък със
+                                Служители</a>
+                        </li>
+                        <li><a th:href="@{/admin/employees/add}">
+                            <i style="font-size: 1.5rem" class="bi bi-person-plus"></i>Добавяне на
+                            Служител</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon bi bi-briefcase"></span>
+                        <span class="mtext">Клиенти</span>
+                    </a>
+                    <ul class="submenu">
+                        <li>
+                            <a th:href="@{/admin/clients/list}">
+                                <span class="micon bi bi-table"></span>Списък с Клиенти
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/admin/clients/add}">
+                                <i style="font-size: 1.5rem" class="bi bi-person-plus"></i>Добавяне на Клиент
+                            </a>
+                        </li>
+                    </ul>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon bi bi-boxes"></span>
+
+                        <span class="mtext">Проекти</span>
+                    </a>
+                    <ul class="submenu">
+                        <li>
+                            <a th:href="@{/admin/projects/list}"><span class="micon bi bi-table"></span>Списък с Проекти</a>
+                        </li>
+                        <li><a th:href="@{/admin/projects/add}">
+                            <i style="font-size: 1.5rem" ></i>Добавяне на Проект</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu">
+                    <a th:href="@{/admin/employees/stats}" class="dropdown-toggle no-arrow">
+								<span class="micon bi bi-bar-chart"></span
+                                ><span class="mtext">Статистика</span>
+                    </a>
+                </li>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="mobile-menu-overlay"></div>
+
+<div class="main-container">
+    <div class="pd-ltr-20">
+        <div class="card-box pd-20 height-100-p mb-30">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <img src="own/images/AI_v3.gif" alt="this slowpoke moves"/>
+                </div>
+                <div class="col-md-8">
+                    <h4 class="font-20 weight-500 mb-10 text-capitalize">
+                        Добре дошъл
+                        <div class="weight-600 font-30 text-blue" th:text="${whoIsLoggedInFullName}"></div>
+                    </h4>
+                    <p class="font-18 max-width-600">
+                        Желая ти продуктивен ден.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="row pb-10 col-md-12">
+                <div class="col-xl-4 col-lg-4 col-md-6 mb-20">
+                    <div class="card-box height-100-p widget-style3">
+                        <div class="d-flex flex-wrap">
+                            <div class="widget-data">
+                                <div class="weight-700 font-24 text-dark" th:text="${employeeCount}"></div>
+                                <div class="font-14 text-secondary weight-500">
+                                    Служители
+                                </div>
+                            </div>
+                            <div class="widget-icon">
+                                <div class="icon" data-color="#00eccf" style="color: rgb(0, 236, 207);">
+                                    <i class="bi bi-people"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 mb-20">
+                    <div class="card-box height-100-p widget-style3">
+                        <div class="d-flex flex-wrap">
+                            <div class="widget-data">
+                                <div class="weight-700 font-24 text-dark" th:text="${clientCount}"></div>
+                                <div class="font-14 text-secondary weight-500">
+                                    Клиенти
+                                </div>
+                            </div>
+                            <div class="widget-icon">
+                                <div class="icon" data-color="#00eccf" style="color: rgb(0, 236, 207);">
+                                    <i class="icon-copy dw dw-briefcase"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 mb-20">
+                    <div class="card-box height-100-p widget-style3">
+                        <div class="d-flex flex-wrap">
+                            <div class="widget-data">
+                                <div th:text="${projectCount}" class="weight-700 font-24 text-dark"></div>
+                                <div class="font-14 text-secondary weight-500">
+                                    Брой Проекти
+                                </div>
+                            </div>
+                            <div class="widget-icon">
+                                <div class="icon" data-color="#00eccf" style="color: rgb(0, 236, 207);">
+                                    <i class="bi bi-boxes"></i>
+                                </div>
+                                <!--                                    <i class="icon-copy fa fa-stethoscope" aria-hidden="true"></i>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-8 mb-30">
+                <div class="card-box height-100-p pd-20">
+                    <h2 class="h4 mb-20">Проекти/Клиенти</h2>
+                    <div style="width: 600px; height: 400px;">
+                        <canvas id="clientsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- js -->
+<script src="http://localhost:8080/vendors/scripts/core.js"></script>
+<script src="http://localhost:8080/vendors/scripts/script.min.js"></script>
+<script src="http://localhost:8080/vendors/scripts/process.js"></script>
+<script src="http://localhost:8080/vendors/scripts/layout-settings.js"></script>
+<!--<script src="http://localhost:8080/src/plugins/apexcharts/apexcharts.min.js"></script>-->
+<script src="http://localhost:8080/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+<!-- ApexChart-->
+<!--<th:block layout:fragment="script">-->
+
+<!--    <script th:src="@{/own/scripts/MyChartScript.js}"></script>-->
+
+<!--    <script th:inline="javascript">-->
+<!--    var clients = [[${allClientsList}]]-->
+
+<!--    </script>-->
+
+<!--</th:block>-->
+
+
+<!--<script src="http://localhost:8080/vendors/scripts/dashboard.js"></script>-->
+<!-- Google Tag Manager (noscript) -->
+<noscript
+>
+    <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS"
+            height="0"
+            width="0"
+            style="display: none; visibility: hidden"
+    ></iframe
+    >
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+</body>
+</html>
