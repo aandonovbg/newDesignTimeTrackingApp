@@ -1,0 +1,3 @@
+thymeleaf:
+  cache: true
+  prefix: classpath:/templates
