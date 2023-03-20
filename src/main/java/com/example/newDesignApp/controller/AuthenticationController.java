@@ -87,7 +87,7 @@ public class AuthenticationController {
             Authentication authentication = new UsernamePasswordAuthenticationToken(username, password);
             Authentication result = authenticationManager.authenticate(authentication);
             SecurityContextHolder.getContext().setAuthentication(result);
-            return "redirect:/startup/index";
+            return "/startup/index";
         } catch (AuthenticationException e) {
             model.addAttribute("error", "Invalid username or password");
             return "login";
