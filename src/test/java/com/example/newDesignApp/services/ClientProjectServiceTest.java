@@ -1,32 +1,24 @@
 package com.example.newDesignApp.services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import com.example.newDesignApp.entity.Client;
 import com.example.newDesignApp.entity.Project;
 import com.example.newDesignApp.repository.ClientRepository;
 import com.example.newDesignApp.repository.DailyProtocolRepository;
 import com.example.newDesignApp.repository.EmployeeRepository;
 import com.example.newDesignApp.repository.ProjectRepository;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import org.junit.jupiter.api.Disabled;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ContextConfiguration(classes = {ClientProjectService.class})
 @ExtendWith(SpringExtension.class)
@@ -82,45 +74,45 @@ class ClientProjectServiceTest {
 
     @Test
     void testCreateProject() {
-        when(dateConversionService.getExpirationDateFormatted((String) any())).thenReturn("2023-15-03");
+        when(dateConversionService.getExpirationDateFormatted((String) any())).thenReturn("2020-03-01");
 
         Client client = new Client();
-        client.setClientName("LudogorieSoft");
+        client.setClientName("Dr Jane Doe");
         client.setId(1L);
         client.setProjectsList(new ArrayList<>());
 
         Project project = new Project();
         project.setClient(client);
-        project.setExpirationDate("2023-15-03");
+        project.setExpirationDate("2020-03-01");
         project.setId(1L);
-        project.setProjectName("Разработване на С-ма за следене на времето");
+        project.setProjectName("Project Name");
         when(projectRepository.save((Project) any())).thenReturn(project);
 
         Client client1 = new Client();
-        client1.setClientName("LudogorieSoft");
+        client1.setClientName("Dr Jane Doe");
         client1.setId(1L);
         client1.setProjectsList(new ArrayList<>());
 
         Project project1 = new Project();
         project1.setClient(client1);
-        project1.setExpirationDate("2023-15-03");
+        project1.setExpirationDate("2020-03-01");
         project1.setId(1L);
-        project1.setProjectName("Разработване на С-ма за следене на времето");
-        clientProjectService.createProject(project1, "2023-15-03");
+        project1.setProjectName("Project Name");
+        clientProjectService.createProject(project1, "2020-03-01");
         verify(dateConversionService).getExpirationDateFormatted((String) any());
         verify(projectRepository).save((Project) any());
-        assertEquals("2023-15-03", project1.getExpirationDate());
+        assertEquals("2020-03-01", project1.getExpirationDate());
     }
 
 
     @Test
     public void testIfClientExists() {
 
-        Client client=new Client();
+        Client client = new Client();
         client.setClientName("Sisecam");
         client.setId(1L);
         client.setProjectsList(new ArrayList<>());
-        List<Client> clients=new ArrayList<>();
+        List<Client> clients = new ArrayList<>();
         clients.add(client);
         when(clientRepository.findAll()).thenReturn(clients);
 

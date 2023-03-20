@@ -1,13 +1,14 @@
 package com.example.newDesignApp.services;
 
+import com.example.newDesignApp.entity.Admin;
 import com.example.newDesignApp.entity.Employee;
-import com.example.newDesignApp.entity.User;
+import com.example.newDesignApp.enums.Role;
 import com.example.newDesignApp.repository.UserRepository;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -22,6 +23,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.Arrays;
 import java.util.Collection;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes = {AuthenticationService.class})
@@ -71,7 +73,9 @@ class AuthenticationServiceTest {
             @Override
             public String getName() {
                 return null;
-            }            @Override
+            }
+
+            @Override
             public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
 
             }
@@ -152,7 +156,7 @@ class AuthenticationServiceTest {
     }
 
     @Test
-    public void testGetUserImage() {
+    public void testGetUserImage1() {
         Employee employee = new Employee();
         byte[] mockImage = new byte[]{0x12, 0x34, 0x56};
         employee.setProfilePicture(mockImage);
@@ -165,9 +169,26 @@ class AuthenticationServiceTest {
 
         byte[] result = employee.getProfilePicture();
 
-        Assert.assertArrayEquals(mockImage, result);
+        assertArrayEquals(mockImage, result);
     }
 
+    @Test
+    public void testGetUserImage2() {
+        byte[] mockImage = new byte[]{0x12, 0x34, 0x56};
+        // Create a test user with a profile picture
+        Admin admin = new Admin();
+        admin.setUsername("adminUser");
+        admin.setPassword("1234");
+        admin.setEmail("testuser@example.com");
+        admin.setRole(Role.ADMIN);
+        admin.setFullName("Test User");
+        admin.setProfilePicture(mockImage);
+        // Set up the mock UserRepository to return the test user
+        Mockito.when(userRepository.getUserByUsername("adminUser")).thenReturn(admin);
+        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("adminUser", "1234"));
+        // Call the getUserImage method and check the result
+        assertArrayEquals(authenticationService.getUserImage(), admin.getProfilePicture());
+    }
 
     @Test
     public void testGetLoggedInRole() {
