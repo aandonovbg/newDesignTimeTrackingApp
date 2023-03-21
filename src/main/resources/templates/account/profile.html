@@ -36,7 +36,7 @@
             rel="stylesheet"
     />
     <!-- CSS -->
-    <link href="http://localhost:8080/vendors/styles/core.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/vendors/styles/core.css"/>
     <link
             rel="stylesheet"
             type="text/css"
@@ -173,11 +173,22 @@
     <div class="menu-block customscroll">
         <div class="sidebar-menu" >
             <ul id="accordion-menu1">
-                <li class="menu">
-                    <a th:href="@{/admin/dashboard}" class="dropdown-toggle no-arrow">
-								<span class="micon bi bi-house"></span
-                                ><span class="mtext">Админ Панел</span>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon bi bi-people"></span>
+
+                        <span class="mtext">Админи</span>
                     </a>
+                    <ul class="submenu">
+                        <li>
+                            <a th:href="@{/admin/list}"><span class="micon bi bi-table"></span>Списък с
+                                Админи</a>
+                        </li>
+                        <li><a th:href="@{/admin/add}">
+                            <i style="font-size: 1.5rem" class="bi bi-person-plus"></i>Добавяне на
+                            Админ</a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
@@ -1218,16 +1229,6 @@
 </div>
 
 <!-- js -->
-<script src="http://localhost:8080/vendors/scripts/core.js"></script>
-<script src="http://localhost:8080/vendors/scripts/script.min.js"></script>
-<script src="http://localhost:8080/vendors/scripts/process.js"></script>
-<script src="http://localhost:8080/vendors/scripts/layout-settings.js"></script>
-
-
-<script src="http://localhost:8080/vendors/scripts/core.js"></script>
-<script src="http://localhost:8080/vendors/scripts/script.min.js"></script>
-<script src="http://localhost:8080/vendors/scripts/process.js"></script>
-<script src="http://localhost:8080/vendors/scripts/layout-settings.js"></script>
 <script src="http://localhost:8080/src/plugins/cropperjs/dist/cropper.js"></script>
 <script src="http://localhost:8080/vendors/scripts/core.js"></script>
 <script src="http://localhost:8080/vendors/scripts/script.min.js"></script>

@@ -64,7 +64,7 @@ public class AuthenticationController {
             model.addAttribute("employeeDailyProtocols",
                     dailyProtocolRepository.findBySpecificEmployeeIdAndProtocolDate(userRepository.getUserByUsername(authenticationService.getWhoIsLoggedInUserName()).getId(),dateConversionService.getCurrentDateFormatted()));
 
-            return "/protocol/listProtocols";
+            return "protocol/listProtocols";
         }
 
         model.addAttribute("whoIsLoggedInFullName",authenticationService.getWhoIsLoggedInFullName());
@@ -73,7 +73,7 @@ public class AuthenticationController {
         model.addAttribute("clientCount", statistics.getClientCount());
         model.addAttribute("projectCount",statistics.getProjectsCount());
         model.addAttribute("allClientsList",statistics.getAllClientsList());
-    return "/startup/index";
+    return "startup/index";
     }
 
     @PostMapping("/authenticate")

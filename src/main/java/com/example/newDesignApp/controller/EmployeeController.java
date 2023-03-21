@@ -66,21 +66,21 @@ public class EmployeeController {
 
 
     @PostMapping("/submit")
-    public String addUser(@ModelAttribute("registerDto")
+    public ModelAndView addUser(@ModelAttribute("registerDto")
                           @Valid UserRegisterDto registerDto,
                           BindingResult bindingResult, Model model) throws IOException, MessagingException {
         getLoggedInInfo(model);
         if (userService.ifUserExists(registerDto.getUsername())) {
             bindingResult.rejectValue("username", "error.username", "Потребителското Име вече е заето. Моля изберете друго.");
-            return ("admin/employees/addEmployee");
+            return new ModelAndView ("admin/employees/add");
         }
         if (bindingResult.hasErrors()) {
-            return ("admin/employees/addEmployee");
+            return new ModelAndView("admin/employees/add");
         } else {
             registerDto.setRole(Role.EMPLOYEE);
             userService.createUser(registerDto);
 
-            return "redirect:/admin/employees/list";
+            return new ModelAndView("redirect:/admin/employees/list");
         }
     }
 
