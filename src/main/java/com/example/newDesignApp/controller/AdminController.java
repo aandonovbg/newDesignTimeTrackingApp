@@ -161,9 +161,9 @@ public class AdminController {
         Optional<Admin> optionalAdmin = adminRepository.findById(adminId);
         if (optionalAdmin.isPresent()) {
             adminRepository.delete(optionalAdmin.get());
-            return new ModelAndView("redirect:/admin/admins/list");
+            return new ModelAndView("redirect:/admin/list");
         } else {
-            return new ModelAndView("redirect:/admin/admins/list");
+            return new ModelAndView("redirect:/admin/list");
         }
     }
 }
