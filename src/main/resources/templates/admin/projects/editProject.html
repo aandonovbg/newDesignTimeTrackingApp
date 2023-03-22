@@ -117,7 +117,7 @@
                         data-toggle="dropdown"
                 >
 							<span class="user-icon">
-								<img src="http://localhost:8080/account/profile/image" alt=""/>
+								<img th:src="@{/account/profile/image}" alt=""/>
 							</span>
                     <span class="user-name" th:text="${account.username}"></span>
                 </a>
