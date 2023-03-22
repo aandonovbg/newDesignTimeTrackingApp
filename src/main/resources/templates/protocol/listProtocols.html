@@ -10,19 +10,19 @@
     <link
             rel="apple-touch-icon"
             sizes="180x180"
-            href="http://localhost:8080/vendors/images/brandAW.png"
+            href="vendors/images/brandAW.png"
     />
     <link
             rel="icon"
             type="image/png"
             sizes="32x32"
-            href="http://localhost:8080/vendors/images/brandAW.png"
+            href="vendors/images/brandAW.png"
     />
     <link
             rel="icon"
             type="image/png"
             sizes="16x16"
-            href="http://localhost:8080/vendors/images/brandAW.png"
+            href="vendors/images/brandAW.png"
     />
 
     <!-- Mobile Specific Metas -->
@@ -37,23 +37,24 @@
             rel="stylesheet"
     />
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="http://localhost:8080/vendors/styles/core.css"/>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/vendors/styles/core.css"/>
     <link
             rel="stylesheet"
             type="text/css"
-            href="http://localhost:8080/vendors/styles/icon-font.min.css"
+            href="/vendors/styles/icon-font.min.css"
     />
     <link
             rel="stylesheet"
             type="text/css"
-            href="http://localhost:8080/src/plugins/datatables/css/dataTables.bootstrap4.min.css"
+            href="src/plugins/datatables/css/dataTables.bootstrap4.min.css"
     />
     <link
             rel="stylesheet"
             type="text/css"
-            href="http://localhost:8080/src/plugins/datatables/css/responsive.bootstrap4.min.css"
+            href="/src/plugins/datatables/css/responsive.bootstrap4.min.css"
     />
-    <link rel="stylesheet" type="text/css" href="http://localhost:8080/vendors/styles/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/vendors/styles/style.css"/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
           integrity="sha512-U9/Ir5e5q92Hb1/FWlGpefRg5h2wEQuvHJWEEzOgZfV15Qk+TvOD7VWmK8Uc7V+OFq6s69s/kWJN8kX7BbTXg=="
@@ -119,7 +120,7 @@
                         data-toggle="dropdown"
                 >
 							<span class="user-icon">
-								<img src="http://localhost:8080/account/profile/image" alt=""/>
+								<img th:src="@{/account/profile/image}" alt=""/>
 							</span>
                     <span class="user-name" th:text="${account.username}"></span>
                 </a>
@@ -142,9 +143,9 @@
 <div class="left-side-bar">
     <div class="brand-logo">
         <a th:href="@{/}">
-            <img src="http://localhost:8080/vendors/images/bannerAW.png" alt="" class="dark-logo"/>
+            <img src="/vendors/images/bannerAW.png" alt="" class="dark-logo"/>
             <img
-                    src="http://localhost:8080/vendors/images/bannerAW.png"
+                    src="/vendors/images/bannerAW.png"
                     alt=""
                     class="light-logo"
             />
@@ -244,24 +245,24 @@
 </div>
 
 <!-- js -->
-<script src="http://localhost:8080/vendors/scripts/core.js"></script>
-<script src="http://localhost:8080/vendors/scripts/script.min.js"></script>
-<script src="http://localhost:8080/vendors/scripts/process.js"></script>
-<script src="http://localhost:8080/vendors/scripts/layout-settings.js"></script>
-<script src="http://localhost:8080/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
-<script src="http://localhost:8080/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
-<script src="http://localhost:8080/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
-<script src="http://localhost:8080/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+<script src="/vendors/scripts/core.js"></script>
+<script src="/vendors/scripts/script.min.js"></script>
+<script src="/vendors/scripts/process.js"></script>
+<script src="/vendors/scripts/layout-settings.js"></script>
+<script src="/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+<script src="/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+<script src="/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+<script src="/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 <!-- buttons for Export datatable -->
-<script src="http://localhost:8080/src/plugins/datatables/js/dataTables.buttons.min.js"></script>
-<script src="http://localhost:8080/src/plugins/datatables/js/buttons.bootstrap4.min.js"></script>
-<script src="http://localhost:8080/src/plugins/datatables/js/buttons.print.min.js"></script>
-<script src="http://localhost:8080/src/plugins/datatables/js/buttons.html5.min.js"></script>
-<script src="http://localhost:8080/src/plugins/datatables/js/buttons.flash.min.js"></script>
-<script src="http://localhost:8080/src/plugins/datatables/js/pdfmake.min.js"></script>
-<script src="http://localhost:8080/src/plugins/datatables/js/vfs_fonts.js"></script>
+<script src="/src/plugins/datatables/js/dataTables.buttons.min.js"></script>
+<script src="/src/plugins/datatables/js/buttons.bootstrap4.min.js"></script>
+<script src="/src/plugins/datatables/js/buttons.print.min.js"></script>
+<script src="/src/plugins/datatables/js/buttons.html5.min.js"></script>
+<script src="/src/plugins/datatables/js/buttons.flash.min.js"></script>
+<script src="/src/plugins/datatables/js/pdfmake.min.js"></script>
+<script src="/src/plugins/datatables/js/vfs_fonts.js"></script>
 <!-- Datatable Setting js -->
-<script src="http://localhost:8080/vendors/scripts/datatable-setting.js"></script>
+<script src="/vendors/scripts/datatable-setting.js"></script>
 <!-- Google Tag Manager (noscript) -->
 <noscript
 >
