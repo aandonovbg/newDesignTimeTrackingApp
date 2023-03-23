@@ -78,7 +78,7 @@ public class ProtocolController {
         model.addAttribute("projects",projectRepository.findAll());
         model.addAttribute("dateNow", dateConversionService.getCurrentDateFormatted());
         model.addAttribute("dailyProtocol", new DailyProtocol());
-        return "/protocol/addProtocol";
+        return "protocol/addProtocol";
     }
 
     @PostMapping("/submit")
