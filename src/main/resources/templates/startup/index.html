@@ -69,6 +69,8 @@
 			gtag("config", "G-GBZ3SGGX85");
 
 
+
+
     </script>
     <!-- Google Tag Manager -->
     <script>
@@ -84,6 +86,8 @@
 			})(window, document, "script", "dataLayer", "GTM-NXZMQSS");
 
 
+
+
     </script>
     <!-- End Google Tag Manager -->
     <!-- Custom CSS -->
@@ -91,47 +95,65 @@
     .dropdown-toggle.no-arrow::after {
     display: none;
 }
-
     </style>
     <!-- Custom Script -->
-    <script>
-  fetch('/client/allClientsData')
-    .then(response => response.json())
-    .then(data => {
-        const clientNames = [];
-        const numProjects = [];
-        data.forEach(clientData => {
-            clientNames.push(clientData.clientName);
-            numProjects.push(clientData.numProjects);
-        });
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+<!--    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-rounded-bars@1.0.6/dist/chartjs-plugin-rounded-bars.min.js"></script>-->
 
-        const clientsChart = new Chart(document.getElementById('clientsChart'), {
-            type: 'bar',
-            data: {
-                labels: clientNames,
-                datasets: [{
-                    label: 'Брой Проекти',
-                    data: numProjects,
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
-    });
+<!--    <script>-->
 
-</script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="own/scripts/MyChartScript.js"></script>
+<!--  fetch('/client/allClientsData')-->
+<!--    .then(response => response.json())-->
+<!--    .then(data => {-->
+<!--        const clientNames = [];-->
+<!--        const numProjects = [];-->
+<!--        data.forEach(clientData => {-->
+<!--            clientNames.push(clientData.clientName);-->
+<!--            numProjects.push(clientData.numProjects);-->
+<!--        });-->
+
+<!--        const clientsChart = new Chart(document.getElementById('clientsChart'), {-->
+<!--            type: 'bar',-->
+<!--            data: {-->
+<!--                labels: clientNames,-->
+<!--                datasets: [{-->
+<!--                    label: 'Брой Проекти',-->
+<!--                    data: numProjects,-->
+<!--                    backgroundColor: 'rgba(54, 162, 235, 0.2)',-->
+<!--                    borderColor: 'rgba(54, 162, 235, 1)',-->
+<!--                    borderWidth: 1,-->
+<!--                    borderRadius: 5, // adjust this value to change the radius of the rounded corners-->
+<!--                    barThickness: 40 // adjust this value to change the bar width-->
+<!--                }]-->
+<!--            },-->
+<!--            options: {-->
+<!--                scales: {-->
+<!--                    yAxes: [{-->
+<!--                        ticks: {-->
+<!--                            beginAtZero: true,-->
+<!--                            stepSize: 1,-->
+<!--                            precision: 0,-->
+<!--&lt;!&ndash;                callback: function(value, index, values) {&ndash;&gt;-->
+<!--&lt;!&ndash;                  if (Math.floor(value) === value) {&ndash;&gt;-->
+<!--&lt;!&ndash;                    return value;&ndash;&gt;-->
+<!--&lt;!&ndash;                  }&ndash;&gt;-->
+<!--&lt;!&ndash;                }&ndash;&gt;-->
+<!--                        }-->
+<!--                    }]-->
+<!--                },-->
+<!--                plugins: {-->
+<!--                    ovalBars: {-->
+<!--                        ratio: 0.5 // adjust this value to change the oval shape-->
+<!--                    }-->
+<!--                }-->
+<!--            }-->
+<!--        });-->
+<!--    });-->
+
+<!--</script>-->
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="/own/scripts/MyChartScript.js"></script>
 </head>
 <body class="sidebar-light">
 <div class="header">
@@ -247,7 +269,7 @@
                             <a th:href="@{/admin/projects/list}"><span class="micon bi bi-table"></span>Списък с Проекти</a>
                         </li>
                         <li><a th:href="@{/admin/projects/add}">
-                            <i style="font-size: 1.5rem" ></i>Добавяне на Проект</a>
+                            <i style="font-size: 1.5rem"></i>Добавяне на Проект</a>
                         </li>
                     </ul>
                 </li>
@@ -340,10 +362,11 @@
         </div>
         <div class="row">
             <div class="col-xl-8 mb-30">
-                <div class="card-box height-100-p pd-20">
+                <div class="card-box height-100-p pd-20 " style="position: relative;">
                     <h2 class="h4 mb-20">Проекти/Клиенти</h2>
-                    <div style="width: 600px; height: 400px;">
-                        <canvas id="clientsChart"></canvas>
+<!--                    <div style="width: 600px; height: 400px;">-->
+                    <div>
+                        <canvas id="clientsChart" style="width: 267px;min-height: 350px;"></canvas>
                     </div>
                 </div>
             </div>
